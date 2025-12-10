@@ -1,3 +1,4 @@
+import 'package:apetit/screens/title_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +23,8 @@ class ApetitApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      // home: // Todo ...,
+      debugShowCheckedModeBanner: false,
+      home: const TitleScreen()
     );
   }
 }
