@@ -1,4 +1,4 @@
-import 'package:apetit/screens/category_screen.dart';
+import 'package:apetit/screens/categories_screen.dart';
 import 'package:apetit/screens/favorite_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class AppScreen extends StatefulWidget {
 
 class _AppScreenState extends State<AppScreen> {
   final List<Widget> _screens = const [
-    CategoryScreen(),
+    CategoriesScreen(),
     FavoriteScreen()
   ];
 
@@ -20,10 +20,9 @@ class _AppScreenState extends State<AppScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
 
     if(_selectedScreenIndex == 0){
-      _appBarTitle = CategoryScreen.title;
+      _appBarTitle = CategoriesScreen.title;
     } else if(_selectedScreenIndex == 1){
       _appBarTitle = FavoriteScreen.title;
     }
