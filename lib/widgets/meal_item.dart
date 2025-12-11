@@ -1,15 +1,16 @@
 import 'package:apetit/models/food_meal.dart';
-import 'package:apetit/screens/meal_detail_screen.dart';
 import 'package:apetit/widgets/meal_image.dart';
 import 'package:apetit/widgets/meal_item_meta_info.dart';
 import 'package:flutter/material.dart';
 
 class MealItem extends StatelessWidget {
   final FoodMeal meal;
+  final void Function(FoodMeal) onSelectMeal;
 
   const MealItem({
       super.key,
       required this.meal,
+      required this.onSelectMeal
     });
 
   @override
@@ -20,10 +21,7 @@ class MealItem extends StatelessWidget {
       elevation: 3,
       child: InkWell(
         onTap: (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => MealDetailScreen(meal: meal)),
-          );
+          onSelectMeal(meal);
         },
         child: Stack(
           alignment: Alignment.center,

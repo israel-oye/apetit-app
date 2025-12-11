@@ -1,4 +1,5 @@
 import 'package:apetit/models/food_meal.dart';
+import 'package:apetit/screens/meal_detail_screen.dart';
 import 'package:apetit/widgets/meal_item.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,13 @@ class MealCategoryScreen extends StatelessWidget {
     required this.title,
     required this.meals,
     });
+
+  void selectMeal(BuildContext context, FoodMeal meal){
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => MealDetailScreen(meal: meal)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +67,12 @@ class MealCategoryScreen extends StatelessWidget {
     return ListView.builder(
       itemCount: meals.length,
       itemBuilder: (ctx, index) {
-        return MealItem(meal: meals.elementAt(index));
+        return MealItem(
+          meal: meals.elementAt(index),
+          onSelectMeal: (meal){
+            selectMeal(context, meal);
+          },
+        );
       },
     );
   }
