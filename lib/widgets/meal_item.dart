@@ -1,10 +1,12 @@
 import 'package:apetit/models/food_meal.dart';
+import 'package:apetit/screens/meal_detail_screen.dart';
+import 'package:apetit/widgets/meal_image.dart';
 import 'package:apetit/widgets/meal_item_meta_info.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
   final FoodMeal meal;
+
   const MealItem({
       super.key,
       required this.meal,
@@ -17,31 +19,16 @@ class MealItem extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       elevation: 3,
       child: InkWell(
-        onTap: (){},
+        onTap: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => MealDetailScreen(meal: meal)),
+          );
+        },
         child: Stack(
           alignment: Alignment.center,
           children: [
-            FadeInImage(
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 200,
-              placeholder: MemoryImage(kTransparentImage), 
-              image: NetworkImage(meal.imageUrl),
-              imageErrorBuilder: (ctx, error, stackTrace){
-                return SizedBox(
-                  width: double.infinity,
-                  height: 200,
-                  child: Container(
-                    color: const Color.fromARGB(157, 238, 238, 238),
-                    child: Icon(
-                      Icons.image_not_supported,
-                      size: 50,
-                      color: Colors.grey[400],
-                    ),
-                  ),
-                );
-              },
-            ),
+            MealImage(imageUrl: meal.imageUrl),
             Positioned(
               bottom: -6,
               left: 0,
