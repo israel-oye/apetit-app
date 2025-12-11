@@ -1,7 +1,9 @@
 import 'package:apetit/models/food_meal.dart';
+import 'package:apetit/providers/favorites_provider.dart';
 import 'package:apetit/widgets/meal_image.dart';
 import 'package:apetit/widgets/meal_item_meta_info.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MealItem extends StatelessWidget {
   final FoodMeal meal;
@@ -70,6 +72,26 @@ class MealItem extends StatelessWidget {
                       ],
                     )
                   ],
+                ),
+              )
+            ),
+            Positioned(
+              top: 8,
+              left: 0,
+              child: Consumer<FavoritesProvider>(
+                builder: (ctx, provider, _) => IconButton(
+                  onPressed: () {
+                    provider.favorites.contains(meal)
+                        ? provider.removeFavorite(meal)
+                        : provider.addFavorite(meal);
+                  },
+                  icon: Icon(
+                    provider.favorites.contains(meal)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    size: 36,
+                    color: Colors.red,
+                  ),
                 ),
               )
             )

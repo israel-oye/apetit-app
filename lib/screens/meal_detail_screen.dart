@@ -1,7 +1,9 @@
 import 'package:apetit/models/food_meal.dart';
+import 'package:apetit/providers/favorites_provider.dart';
 import 'package:apetit/widgets/meal_detail_section.dart';
 import 'package:apetit/widgets/meal_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MealDetailScreen extends StatelessWidget {
   final FoodMeal meal;
@@ -16,7 +18,20 @@ class MealDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.favorite_border))
+          Consumer<FavoritesProvider>(
+            builder: (ctx, provider, _) => IconButton(
+              onPressed: (){
+                provider.favorites.contains(meal)
+                    ? provider.removeFavorite(meal)
+                    : provider.addFavorite(meal);
+              }, 
+              icon: Icon(
+                provider.favorites.contains(meal)
+                    ? Icons.favorite
+                    : Icons.favorite_border,
+              )
+            ),
+          )
         ],
       ),
       body: ListView(
