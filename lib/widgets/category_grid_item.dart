@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class CategoryGridItem extends StatelessWidget {
   final FoodCategory category;
+  final VoidCallback onSelectCategory;
 
   const CategoryGridItem({
       super.key, 
-      required this.category
+      required this.category,
+      required this.onSelectCategory,
     });
 
   @override
@@ -19,9 +21,7 @@ class CategoryGridItem extends StatelessWidget {
         : appTheme.colorScheme.onInverseSurface;
 
     return InkWell(
-      onTap: (){
-        print(category.title);
-      },
+      onTap: onSelectCategory,
       borderRadius: BorderRadius.circular(8),
       child: Container(
         padding: const EdgeInsets.all(16),

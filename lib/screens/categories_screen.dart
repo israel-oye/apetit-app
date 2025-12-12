@@ -1,21 +1,38 @@
 import 'package:apetit/data/dummy_data.dart';
+import 'package:apetit/models/food_category.dart';
+import 'package:apetit/models/food_meal.dart';
+import 'package:apetit/screens/meal_category_screen.dart';
 import 'package:apetit/widgets/category_grid_item.dart';
 import 'package:apetit/widgets/category_list_item.dart';
 import 'package:flutter/material.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class CategoriesScreen extends StatefulWidget {
+  const CategoriesScreen({super.key});
 
   static String title = 'Categories';
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<CategoriesScreen> createState() => _CategoryScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class _CategoryScreenState extends State<CategoriesScreen> {
   final allCategories = dummyCategories;
 
   bool _isListLayout = false;
+
+  void _selectCategory(FoodCategory category){
+    List<FoodMeal> categoryMeals = dummyMeals
+        .where((meal) => meal.categories.contains(category.id))
+        .toList();
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_)=> MealCategoryScreen(
+          title: category.title, 
+          meals: categoryMeals
+        ),
+      )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +70,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
       itemCount: allCategories.length,
       itemBuilder: (context, index){
         final currentCategory = allCategories[index];
-        return CategoryGridItem(category: currentCategory);
+        return CategoryGridItem(
+          category: currentCategory,
+          onSelectCategory: () {
+            _selectCategory(currentCategory);
+          },
+        );
       },
     );
   }
@@ -72,7 +94,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
           separatorBuilder: (context, index) => Divider(),
           itemBuilder: (ctx, idx){
             final currentCategory = allCategories[idx];
-            return CategoryListItem(category: currentCategory);
+            return CategoryListItem(
+              category: currentCategory,
+              onSelectCategory: () {
+                _selectCategory(currentCategory);
+              },
+            );
           }
         ),
       ),
