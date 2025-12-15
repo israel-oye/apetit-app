@@ -1,7 +1,17 @@
+import 'package:apetit/data/dummy_data.dart';
+import 'package:apetit/models/food_meal.dart';
 import 'package:apetit/screens/categories_screen.dart';
 import 'package:apetit/screens/favorite_screen.dart';
+import 'package:apetit/screens/filter_screen.dart';
 import 'package:apetit/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
+
+const Map<Filter, bool> kInitialFilters = {
+  Filter.glutenFree: false,
+  Filter.lactoseFree: false,
+  Filter.veganFree: false,
+  Filter.vegetarian: false,
+};
 
 class AppScreen extends StatefulWidget {
   const AppScreen({super.key});
@@ -11,24 +21,49 @@ class AppScreen extends StatefulWidget {
 }
 
 class _AppScreenState extends State<AppScreen> {
-  final List<Widget> _screens = const [
-    CategoriesScreen(),
-    FavoriteScreen()
-  ];
 
   int _selectedScreenIndex = 0;
   String _appBarTitle = '';
+  Map<Filter, bool> _selectedFilters =  kInitialFilters;
+  late List<FoodMeal> availableMeals;
 
-  void _goToNavPage(String navLabel){
+  void _goToNavPage(String navLabel) async {
     if (navLabel == 'Meals'){
-
+      setState(() => _selectedScreenIndex = 0);
     } else{
-
+      final filters = await Navigator.push<Map<Filter, bool>>(
+        context,
+        MaterialPageRoute(
+          builder: (_) => FilterScreen(currentFilter: _selectedFilters),
+        ),
+      );
+      setState(() {
+        _selectedFilters = filters ?? kInitialFilters;
+      });
     }
   }
 
   @override
+  void initState() {
+    availableMeals = dummyMeals;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    availableMeals = dummyMeals.where((meal) {
+      if ((_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) ||
+          (_selectedFilters[Filter.lactoseFree]! && !meal.isLactoseFree) ||
+          (_selectedFilters[Filter.veganFree]! && !meal.isVegan) ||
+          (_selectedFilters[Filter.vegetarian]! && !meal.isVegetarian)) {
+        return false;
+      }
+      return true;
+    }).toList();
+    
+    final Widget currentScreen = _selectedScreenIndex == 0
+        ? CategoriesScreen(availableMeals: availableMeals)
+        : const FavoriteScreen();
 
     if(_selectedScreenIndex == 0){
       _appBarTitle = CategoriesScreen.title;
@@ -41,7 +76,7 @@ class _AppScreenState extends State<AppScreen> {
         title: Text(_appBarTitle),
       ),
       drawer: MainDrawer(onSelectNav: _goToNavPage,),
-      body: _screens[_selectedScreenIndex],
+      body: currentScreen,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedScreenIndex,
         onTap: (idx) {
