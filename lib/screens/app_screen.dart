@@ -1,5 +1,6 @@
 import 'package:apetit/screens/categories_screen.dart';
 import 'package:apetit/screens/favorite_screen.dart';
+import 'package:apetit/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
 
 class AppScreen extends StatefulWidget {
@@ -18,6 +19,14 @@ class _AppScreenState extends State<AppScreen> {
   int _selectedScreenIndex = 0;
   String _appBarTitle = '';
 
+  void _goToNavPage(String navLabel){
+    if (navLabel == 'Meals'){
+
+    } else{
+
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -31,6 +40,7 @@ class _AppScreenState extends State<AppScreen> {
       appBar: AppBar(
         title: Text(_appBarTitle),
       ),
+      drawer: MainDrawer(onSelectNav: _goToNavPage,),
       body: _screens[_selectedScreenIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedScreenIndex,
