@@ -1,6 +1,6 @@
 import 'package:apetit/data/dummy_data.dart';
 import 'package:apetit/models/food_meal.dart';
-import 'package:apetit/screens/categories_screen.dart';
+import 'package:apetit/pages/categories_page.dart';
 import 'package:apetit/screens/favorite_screen.dart';
 import 'package:apetit/screens/filter_screen.dart';
 import 'package:apetit/widgets/main_drawer.dart';
@@ -62,11 +62,11 @@ class _AppScreenState extends State<AppScreen> {
     }).toList();
     
     final Widget currentScreen = _selectedScreenIndex == 0
-        ? CategoriesScreen(availableMeals: availableMeals)
+        ? CategoriesPage(availableMeals: availableMeals)
         : const FavoriteScreen();
 
     if(_selectedScreenIndex == 0){
-      _appBarTitle = CategoriesScreen.title;
+      _appBarTitle = CategoriesPage.title;
     } else if(_selectedScreenIndex == 1){
       _appBarTitle = FavoriteScreen.title;
     }
