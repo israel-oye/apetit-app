@@ -2,8 +2,8 @@ import 'package:apetit/data/dummy_data.dart';
 import 'package:apetit/models/food_category.dart';
 import 'package:apetit/models/food_meal.dart';
 import 'package:apetit/screens/meal_category_screen.dart';
-import 'package:apetit/widgets/category_grid_item.dart';
-import 'package:apetit/widgets/category_list_item.dart';
+import 'package:apetit/widgets/category/category_grid_item.dart';
+import 'package:apetit/widgets/category/category_list_item.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesPage extends StatefulWidget {
