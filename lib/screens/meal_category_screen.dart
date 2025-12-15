@@ -1,6 +1,6 @@
 import 'package:apetit/models/food_meal.dart';
 import 'package:apetit/screens/meal_detail_screen.dart';
-import 'package:apetit/widgets/meal_item.dart';
+import 'package:apetit/widgets/meal/meal_item.dart';
 import 'package:flutter/material.dart';
 
 class MealCategoryScreen extends StatelessWidget {

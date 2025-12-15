@@ -1,5 +1,5 @@
 import 'package:apetit/models/food_meal.dart';
-import 'package:apetit/widgets/filter_menu.dart';
+import 'package:apetit/widgets/filter/filter_menu.dart';
 import 'package:flutter/material.dart';
 
 class FilterScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:apetit/models/food_meal.dart';
 import 'package:apetit/providers/favorites_provider.dart';
-import 'package:apetit/widgets/meal_detail_section.dart';
-import 'package:apetit/widgets/meal_image.dart';
+import 'package:apetit/widgets/meal/meal_detail_section.dart';
+import 'package:apetit/widgets/meal/meal_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
