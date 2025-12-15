@@ -53,7 +53,7 @@ class MealCategoryScreen extends StatelessWidget {
             ),
           ),
           Text(
-            'Try checking another category',
+            'Try checking another category or updating the filter',
             style: TextStyle(
               color: theme.colorScheme.secondaryFixed 
             ),
