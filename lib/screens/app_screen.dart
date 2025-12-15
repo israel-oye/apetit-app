@@ -1,7 +1,7 @@
 import 'package:apetit/data/dummy_data.dart';
 import 'package:apetit/models/food_meal.dart';
 import 'package:apetit/pages/categories_page.dart';
-import 'package:apetit/screens/favorite_screen.dart';
+import 'package:apetit/pages/favorite_screen.dart';
 import 'package:apetit/screens/filter_screen.dart';
 import 'package:apetit/widgets/main_drawer.dart';
 import 'package:flutter/material.dart';
@@ -63,12 +63,12 @@ class _AppScreenState extends State<AppScreen> {
     
     final Widget currentScreen = _selectedScreenIndex == 0
         ? CategoriesPage(availableMeals: availableMeals)
-        : const FavoriteScreen();
+        : const FavoritesPage();
 
     if(_selectedScreenIndex == 0){
       _appBarTitle = CategoriesPage.title;
     } else if(_selectedScreenIndex == 1){
-      _appBarTitle = FavoriteScreen.title;
+      _appBarTitle = FavoritesPage.title;
     }
 
     return Scaffold(
