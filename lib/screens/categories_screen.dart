@@ -7,8 +7,9 @@ import 'package:apetit/widgets/category_list_item.dart';
 import 'package:flutter/material.dart';
 
 class CategoriesScreen extends StatefulWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({super.key, required this.availableMeals});
 
+  final List<FoodMeal> availableMeals;
   static String title = 'Categories';
 
   @override
@@ -21,7 +22,7 @@ class _CategoryScreenState extends State<CategoriesScreen> {
   bool _isListLayout = false;
 
   void _selectCategory(FoodCategory category){
-    List<FoodMeal> categoryMeals = dummyMeals
+    List<FoodMeal> categoryMeals = widget.availableMeals
         .where((meal) => meal.categories.contains(category.id))
         .toList();
     Navigator.of(context).push(

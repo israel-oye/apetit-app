@@ -32,9 +32,10 @@ class TitleScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Text(
                 'Apetit',
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.sniglet(
                   fontWeight: FontWeight.bold,
                   fontSize: 28,
+                  color: appTheme.colorScheme.onPrimary.withAlpha(150)
                 ),
               ),
               const SizedBox(height: 72),

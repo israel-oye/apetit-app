@@ -2,6 +2,8 @@ enum Complexity { simple, challenging, hard }
 
 enum Affordability { affordable, pricey, luxurious }
 
+enum Filter { glutenFree, lactoseFree, veganFree, vegetarian }
+
 class FoodMeal {
   const FoodMeal({
     required this.id,
