@@ -1,4 +1,3 @@
-import 'package:apetit/data/dummy_data.dart';
 import 'package:apetit/models/food_meal.dart';
 import 'package:apetit/pages/categories_page.dart';
 import 'package:apetit/pages/favorite_page.dart';
@@ -25,7 +24,6 @@ class _AppScreenState extends State<AppScreen> {
   int _selectedScreenIndex = 0;
   String _appBarTitle = '';
   Map<Filter, bool> _selectedFilters =  kInitialFilters;
-  late List<FoodMeal> availableMeals;
 
   void _goToNavPage(String navLabel) async {
     if (navLabel == 'Meals'){
@@ -44,25 +42,10 @@ class _AppScreenState extends State<AppScreen> {
   }
 
   @override
-  void initState() {
-    availableMeals = dummyMeals;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    availableMeals = dummyMeals.where((meal) {
-      if ((_selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) ||
-          (_selectedFilters[Filter.lactoseFree]! && !meal.isLactoseFree) ||
-          (_selectedFilters[Filter.veganFree]! && !meal.isVegan) ||
-          (_selectedFilters[Filter.vegetarian]! && !meal.isVegetarian)) {
-        return false;
-      }
-      return true;
-    }).toList();
-    
+
     final Widget currentScreen = _selectedScreenIndex == 0
-        ? CategoriesPage(availableMeals: availableMeals)
+        ? CategoriesPage(selectedFilters: _selectedFilters,)
         : const FavoritesPage();
 
     if(_selectedScreenIndex == 0){

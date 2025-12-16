@@ -1,15 +1,17 @@
 import 'package:apetit/data/dummy_data.dart';
 import 'package:apetit/models/food_category.dart';
 import 'package:apetit/models/food_meal.dart';
+import 'package:apetit/providers/meals_provider.dart';
 import 'package:apetit/screens/meal_category_screen.dart';
 import 'package:apetit/widgets/category/category_grid_item.dart';
 import 'package:apetit/widgets/category/category_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesPage extends StatefulWidget {
-  const CategoriesPage({super.key, required this.availableMeals});
+  const CategoriesPage({super.key, required this.selectedFilters});
 
-  final List<FoodMeal> availableMeals;
+  final Map<Filter, bool> selectedFilters;
   static String title = 'Categories';
 
   @override
@@ -22,9 +24,10 @@ class _CategoryScreenState extends State<CategoriesPage> {
   bool _isListLayout = false;
 
   void _selectCategory(FoodCategory category){
-    List<FoodMeal> categoryMeals = widget.availableMeals
-        .where((meal) => meal.categories.contains(category.id))
-        .toList();
+    List<FoodMeal> categoryMeals = Provider.of<MealsProvider>(
+      context,
+      listen: false,
+    ).getFilteredCategoryMeals(category, widget.selectedFilters);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_)=> MealCategoryScreen(

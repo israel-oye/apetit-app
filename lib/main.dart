@@ -1,4 +1,5 @@
 import 'package:apetit/providers/favorites_provider.dart';
+import 'package:apetit/providers/meals_provider.dart';
 import 'package:apetit/screens/title_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,8 @@ class ApetitApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_)=> FavoritesProvider())
+        ChangeNotifierProvider(create: (_)=> FavoritesProvider()),
+        Provider<MealsProvider>(create: (_)=> MealsProvider()),
       ],
       child: MaterialApp(
         theme: theme,
