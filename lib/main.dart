@@ -1,3 +1,4 @@
+import 'package:apetit/providers/categories_provider.dart';
 import 'package:apetit/providers/favorites_provider.dart';
 import 'package:apetit/providers/meals_provider.dart';
 import 'package:apetit/screens/title_screen.dart';
@@ -31,6 +32,7 @@ class ApetitApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_)=> FavoritesProvider()),
         Provider<MealsProvider>(create: (_)=> MealsProvider()),
+        Provider<CategoriesProvider>(create: (_)=> CategoriesProvider())
       ],
       child: MaterialApp(
         theme: theme,
