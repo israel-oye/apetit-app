@@ -1,6 +1,7 @@
 import 'package:apetit/data/dummy_data.dart';
 import 'package:apetit/models/food_category.dart';
 import 'package:apetit/models/food_meal.dart';
+import 'package:apetit/providers/filters_provider.dart';
 
 class MealsProvider{
   final List<FoodMeal> _meals = dummyMeals;

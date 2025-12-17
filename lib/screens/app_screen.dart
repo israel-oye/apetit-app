@@ -1,16 +1,8 @@
-import 'package:apetit/models/food_meal.dart';
 import 'package:apetit/pages/categories_page.dart';
 import 'package:apetit/pages/favorite_page.dart';
 import 'package:apetit/screens/filter_screen.dart';
 import 'package:apetit/widgets/drawer/main_drawer.dart';
 import 'package:flutter/material.dart';
-
-const Map<Filter, bool> kInitialFilters = {
-  Filter.glutenFree: false,
-  Filter.lactoseFree: false,
-  Filter.veganFree: false,
-  Filter.vegetarian: false,
-};
 
 class AppScreen extends StatefulWidget {
   const AppScreen({super.key});
@@ -23,21 +15,18 @@ class _AppScreenState extends State<AppScreen> {
 
   int _selectedScreenIndex = 0;
   String _appBarTitle = '';
-  Map<Filter, bool> _selectedFilters =  kInitialFilters;
 
   void _goToNavPage(String navLabel) async {
     if (navLabel == 'Meals'){
       setState(() => _selectedScreenIndex = 0);
     } else{
-      final filters = await Navigator.push<Map<Filter, bool>>(
+      await Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => FilterScreen(currentFilter: _selectedFilters),
+          builder: (_) => const FilterScreen(),
         ),
       );
-      setState(() {
-        _selectedFilters = filters ?? kInitialFilters;
-      });
+      setState(() => _selectedScreenIndex = 0);
     }
   }
 
@@ -45,7 +34,7 @@ class _AppScreenState extends State<AppScreen> {
   Widget build(BuildContext context) {
 
     final Widget currentScreen = _selectedScreenIndex == 0
-        ? CategoriesPage(selectedFilters: _selectedFilters,)
+        ? CategoriesPage()
         : const FavoritesPage();
 
     if(_selectedScreenIndex == 0){
