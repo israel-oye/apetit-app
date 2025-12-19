@@ -24,7 +24,7 @@ class FilterScreen extends StatelessWidget {
           ),
           ConsumerFilterMenu(
             menuName: 'Vegan',
-            filter: Filter.veganFree,
+            filter: Filter.vegan,
           ),
           ConsumerFilterMenu(
             menuName: 'Vegetarian',

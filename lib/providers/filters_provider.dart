@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-enum Filter { glutenFree, lactoseFree, veganFree, vegetarian }
+enum Filter { 
+  glutenFree("Gluten Free"), 
+  lactoseFree("Lactose Free"), 
+  vegan("Vegan"), 
+  vegetarian("Vegetarian"); 
+  
+  final String name; 
+  const Filter(this.name);
+}
 
 Map<Filter, bool> kInitialFilters = {
   Filter.glutenFree: false,
   Filter.lactoseFree: false,
-  Filter.veganFree: false,
+  Filter.vegan: false,
   Filter.vegetarian: false,
 };
 

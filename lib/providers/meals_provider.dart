@@ -18,7 +18,7 @@ class MealsProvider{
     return _meals.where((meal) {
       if ((filters[Filter.glutenFree]! && !meal.isGlutenFree) ||
           (filters[Filter.lactoseFree]! && !meal.isLactoseFree) ||
-          (filters[Filter.veganFree]! && !meal.isVegan) ||
+          (filters[Filter.vegan]! && !meal.isVegan) ||
           (filters[Filter.vegetarian]! && !meal.isVegetarian)) {
         return false;
       }
@@ -30,7 +30,7 @@ class MealsProvider{
     return getCategoryMeals(category).where((meal) {
       if ((filters[Filter.glutenFree]! && !meal.isGlutenFree) ||
           (filters[Filter.lactoseFree]! && !meal.isLactoseFree) ||
-          (filters[Filter.veganFree]! && !meal.isVegan) ||
+          (filters[Filter.vegan]! && !meal.isVegan) ||
           (filters[Filter.vegetarian]! && !meal.isVegetarian)) {
         return false;
       }
