@@ -2,6 +2,7 @@ import 'package:apetit/pages/categories_page.dart';
 import 'package:apetit/pages/favorite_page.dart';
 import 'package:apetit/screens/filter_screen.dart';
 import 'package:apetit/widgets/drawer/main_drawer.dart';
+import 'package:apetit/widgets/filter/filters_row.dart';
 import 'package:flutter/material.dart';
 
 class AppScreen extends StatefulWidget {
@@ -48,7 +49,18 @@ class _AppScreenState extends State<AppScreen> {
         title: Text(_appBarTitle),
       ),
       drawer: MainDrawer(onSelectNav: _goToNavPage,),
-      body: currentScreen,
+      body: Column(
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: FiltersRow(),
+            )
+          ),
+          Expanded(child: currentScreen),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedScreenIndex,
         onTap: (idx) {
@@ -77,3 +89,4 @@ class _AppScreenState extends State<AppScreen> {
     );
   }
 }
+
