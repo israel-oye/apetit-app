@@ -1,7 +1,6 @@
 import 'package:apetit/models/food_category.dart';
 import 'package:apetit/models/food_meal.dart';
 import 'package:apetit/providers/categories_provider.dart';
-import 'package:apetit/providers/filters_provider.dart';
 import 'package:apetit/providers/meals_provider.dart';
 import 'package:apetit/screens/meal_category_screen.dart';
 import 'package:apetit/widgets/category/category_grid_item.dart';
@@ -24,11 +23,10 @@ class _CategoryScreenState extends State<CategoriesPage> {
   bool _isListLayout = false;
 
   void _selectCategory(FoodCategory category){
-    final selectedFilters = context.read<FiltersProvider>().filters;
     List<FoodMeal> categoryMeals = Provider.of<MealsProvider>(
       context,
       listen: false,
-    ).getFilteredCategoryMeals(category, selectedFilters);
+    ).getFilteredCategoryMeals(category);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_)=> MealCategoryScreen(
