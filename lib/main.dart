@@ -31,10 +31,18 @@ class ApetitApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider<CategoriesProvider>(create: (_)=> CategoriesProvider()),
         ChangeNotifierProvider(create: (_)=> FavoritesProvider()),
         ChangeNotifierProvider(create: (_)=> FiltersProvider()),
-        Provider<MealsProvider>(create: (_)=> MealsProvider()),
-        Provider<CategoriesProvider>(create: (_)=> CategoriesProvider())
+        ProxyProvider<FiltersProvider, MealsProvider>(
+          update: (context, filtersProvider, prev) {
+            if (prev != null && prev.selectedFilters == filtersProvider.filters){
+              return prev;
+            }
+            return MealsProvider(selectedFilters: filtersProvider.filters);
+          },
+        ),
+        
       ],
       child: MaterialApp(
         theme: theme,

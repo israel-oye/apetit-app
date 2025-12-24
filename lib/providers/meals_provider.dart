@@ -4,6 +4,9 @@ import 'package:apetit/models/food_meal.dart';
 import 'package:apetit/providers/filters_provider.dart';
 
 class MealsProvider{
+  MealsProvider({required this.selectedFilters});
+  
+  final Map<Filter, bool> selectedFilters;
   final List<FoodMeal> _meals = dummyMeals;
 
   List<FoodMeal> get allMeals => _meals;
@@ -14,24 +17,12 @@ class MealsProvider{
         .toList();
   }
 
-  List<FoodMeal> getFilteredMeals(Map<Filter, bool> filters){
-    return _meals.where((meal) {
-      if ((filters[Filter.glutenFree]! && !meal.isGlutenFree) ||
-          (filters[Filter.lactoseFree]! && !meal.isLactoseFree) ||
-          (filters[Filter.vegan]! && !meal.isVegan) ||
-          (filters[Filter.vegetarian]! && !meal.isVegetarian)) {
-        return false;
-      }
-      return true;
-    }).toList();
-  }
-
-  List<FoodMeal> getFilteredCategoryMeals(FoodCategory category, Map<Filter, bool> filters){
+  List<FoodMeal> getFilteredCategoryMeals(FoodCategory category){
     return getCategoryMeals(category).where((meal) {
-      if ((filters[Filter.glutenFree]! && !meal.isGlutenFree) ||
-          (filters[Filter.lactoseFree]! && !meal.isLactoseFree) ||
-          (filters[Filter.vegan]! && !meal.isVegan) ||
-          (filters[Filter.vegetarian]! && !meal.isVegetarian)) {
+      if ((selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) ||
+          (selectedFilters[Filter.lactoseFree]! && !meal.isLactoseFree) ||
+          (selectedFilters[Filter.vegan]! && !meal.isVegan) ||
+          (selectedFilters[Filter.vegetarian]! && !meal.isVegetarian)) {
         return false;
       }
       return true;
