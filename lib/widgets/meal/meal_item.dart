@@ -17,12 +17,16 @@ class MealItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _buildUI(context);
+  }
+
+  Widget _buildUI(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8),
       clipBehavior: Clip.hardEdge,
       elevation: 3,
       child: InkWell(
-        onTap: (){
+        onTap: () {
           onSelectMeal(meal);
         },
         child: Stack(
@@ -47,10 +51,10 @@ class MealItem extends StatelessWidget {
                       meal.title,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Colors.white
+                        color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: 12,),
+                    const SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -70,10 +74,10 @@ class MealItem extends StatelessWidget {
                           width: 4,
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ),
             Positioned(
               top: 8,
@@ -81,9 +85,13 @@ class MealItem extends StatelessWidget {
               child: Consumer<FavoritesProvider>(
                 builder: (ctx, provider, _) => IconButton(
                   onPressed: () {
-                    provider.favorites.contains(meal)
-                        ? provider.removeFavorite(meal)
-                        : provider.addFavorite(meal);
+                    if (provider.favorites.contains(meal)){
+                      provider.removeFavorite(meal);
+                      _displayFavoritingMessage(context, meal.title, isAdding: false);
+                    } else {
+                      provider.addFavorite(meal);
+                      _displayFavoritingMessage(context, meal.title);
+                    }
                   },
                   icon: Icon(
                     provider.favorites.contains(meal)
@@ -93,9 +101,32 @@ class MealItem extends StatelessWidget {
                     color: Colors.red,
                   ),
                 ),
-              )
-            )
+              ),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  void _displayFavoritingMessage(BuildContext context, String mealName, {bool isAdding = true}){
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(
+      SnackBar(
+        content: Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(text: isAdding ? 'Added' : 'Removed'),
+              TextSpan(
+                text: ' $mealName ',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextSpan(text: '${isAdding ? 'to' : 'from'} favorites')
+            ],
+          ),
         ),
       ),
     );

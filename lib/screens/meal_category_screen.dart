@@ -65,6 +65,7 @@ class MealCategoryScreen extends StatelessWidget {
 
   Widget _buildSucessState(BuildContext context){
     return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 8),
       itemCount: meals.length,
       itemBuilder: (ctx, index) {
         return MealItem(

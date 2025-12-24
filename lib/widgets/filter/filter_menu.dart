@@ -5,11 +5,11 @@ class FilterMenu extends StatelessWidget {
     super.key,
     required this.menuName,
     required this.menuDescription,
-    required this.filterSet,
+    required this.isFilterSet,
     required this.onChanged,
   });
 
-  final bool filterSet;
+  final bool isFilterSet;
   final String menuName;
   final String menuDescription;
   final void Function(bool newValue) onChanged;
@@ -20,7 +20,7 @@ class FilterMenu extends StatelessWidget {
 
     return SwitchListTile(
       contentPadding: const EdgeInsets.only(left: 24, right: 36),
-      value: filterSet,
+      value: isFilterSet,
       onChanged: onChanged,
       title: Text(
         menuName,
